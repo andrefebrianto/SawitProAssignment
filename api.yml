@@ -25,19 +25,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserRegistrationRequest'
       responses:
         '200':
           description: The ID of created user
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                    example: 9348391
+                $ref: '#/components/schemas/UserRegistrationResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
 
@@ -49,21 +44,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserLogin'
+              $ref: '#/components/schemas/UserLoginRequest'
       responses:
         '200':
           description: The ID of user and access token
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                    example: 9348391
-                  accessToken:
-                    type: string
+                $ref: '#/components/schemas/UserLoginResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
   
@@ -78,7 +66,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/UserResponse'
         '403':
           $ref: '#/components/responses/Forbidden'
     put:
@@ -90,14 +78,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserUpdate'
+              $ref: '#/components/schemas/UserUpdateRequest'
       responses:
         '200':
           description: Current user object
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/UserResponse'
         '403':
           $ref: '#/components/responses/Forbidden'
         '409':
@@ -136,7 +124,7 @@ components:
       required:
         - message
 
-    User:
+    UserRegistrationRequest:
       type: object
       properties:
         phone:
@@ -158,8 +146,18 @@ components:
         - phone
         - name
         - password
+
+    UserRegistrationResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 9348391
+      required:
+        - id
     
-    UserLogin:
+    UserLoginRequest:
       type: object
       properties:
         phone:
@@ -173,8 +171,38 @@ components:
       required:
         - phone
         - password
+    
+    UserLoginResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 9348391
+        accessToken:
+          type: string
+      required:
+        - id
+        - accessToken
 
-    UserUpdate:
+    UserUpdateRequest:
+      type: object
+      properties:
+        phone:
+          type: string
+          minLength: 10
+          maxLength: 13
+          example: +6281234567890
+        name:
+          type: string
+          minLength: 3
+          maxLength: 60
+          example: Andre Febrianto
+      required:
+        - phone
+        - name
+    
+    UserResponse:
       type: object
       properties:
         phone:
@@ -193,5 +221,6 @@ components:
 
   securitySchemes:
     BearerAuth:
-        type: http
-        scheme: bearer
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
