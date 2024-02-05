@@ -1,0 +1,197 @@
+# This is the OpenAPI specification for your service. It is used to generate the client code.
+# To generate the server code, use the Gradle task `openApiGenerate`. The 
+# generated code will be placed in `build/generate-resources/main`.
+#
+# We will evaluate you based on how well you design your API.
+# 1. How well it follows REST principles.
+# 2. How easy it is to understand and use.
+#
+# References
+# 1. https://swagger.io/specification/
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: User Service
+  license:
+    name: MIT
+servers:
+  - url: http://localhost
+paths:
+  /users/registrations:
+    post:
+      summary: Register new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: The ID of created user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 9348391
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /users/login:
+    post:
+      summary: Authenticate user credential
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+      responses:
+        '200':
+          description: The ID of user and access token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 9348391
+                  accessToken:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  
+  /users/profile:
+    get:
+      summary: Get current user profile
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Current user object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    put:
+      summary: Update current user profile
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+      responses:
+        '200':
+          description: Current user object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+components:
+  responses:
+    BadRequest:
+      description: Invalid input parameter(s)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    Forbidden:
+      description: Access to the requested resource is forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    Conflict:
+      description: The request is conflict with the current state of the target resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+
+    User:
+      type: object
+      properties:
+        phone:
+          type: string
+          minLength: 10
+          maxLength: 13
+          example: +6281234567890
+        name:
+          type: string
+          minLength: 3
+          maxLength: 60
+          example: Andre Febrianto
+        password:
+          type: string
+          format: password
+          minLength: 6
+          maxLength: 64
+      required:
+        - phone
+        - name
+        - password
+    
+    UserLogin:
+      type: object
+      properties:
+        phone:
+          type: string
+          example: +6281234567890
+        password:
+          type: string
+          format: password
+          minLength: 6
+          maxLength: 64
+      required:
+        - phone
+        - password
+
+    UserUpdate:
+      type: object
+      properties:
+        phone:
+          type: string
+          minLength: 10
+          maxLength: 13
+          example: +6281234567890
+        name:
+          type: string
+          minLength: 3
+          maxLength: 60
+          example: Andre Febrianto
+      required:
+        - phone
+        - name
+
+  securitySchemes:
+    BearerAuth:
+        type: http
+        scheme: bearer
