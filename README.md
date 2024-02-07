@@ -20,6 +20,7 @@ To run this project you need to have the following installed:
     ```
     go install github.com/golang/mock/mockgen@latest
     ```
+7.[openapi-spec-validator](https://github.com/python-openapi/openapi-spec-validator)
 
 ## Initiate The Project
 
