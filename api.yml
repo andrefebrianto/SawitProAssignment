@@ -135,7 +135,7 @@ components:
           type: string
           example: +6281234567890
           x-oapi-codegen-extra-tags:
-            validate: required,min=10,max=13,startswith=+62
+            validate: required,min=12,max=15,startswith=+62
         name:
           type: string
           example: Andre Febrianto
@@ -168,7 +168,7 @@ components:
           type: string
           example: +6281234567890
           x-oapi-codegen-extra-tags:
-            validate: required,min=10,max=13,startswith=+62
+            validate: required,min=12,max=15,startswith=+62
         password:
           type: string
           format: password
@@ -215,7 +215,7 @@ components:
           type: string
           example: +6281234567890
           x-oapi-codegen-extra-tags:
-            validate: required,min=10,max=13,startswith=+62
+            validate: required,min=12,max=15,startswith=+62
         name:
           type: string
           example: Andre Febrianto
