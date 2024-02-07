@@ -7,6 +7,9 @@ type Validator struct {
 }
 
 func NewValidator(val *validator.Validate) *Validator {
+	// register custom password validation
+	_ = val.RegisterValidation("password", password)
+
 	return &Validator{
 		val: val,
 	}
