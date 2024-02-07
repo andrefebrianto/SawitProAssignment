@@ -16,7 +16,7 @@ init: generate
 	go mod vendor
 
 test:
-	go test -short -coverprofile coverage.out -v ./...
+	go test -short -coverprofile coverage.out -v ./... && go tool cover -html=coverage.out
 
 generate: generated generate_mocks
 
@@ -37,7 +37,7 @@ validate_api_spec:
 	openapi-spec-validator api.yml
 
 cert:
-	@echo "Gemerating RSA certificate for local testing..."
+	@echo "Gemerating RSA certificate..."
 	mkdir cert || true
 	openssl genrsa -out cert/id_rsa 4096
 	openssl rsa -in cert/id_rsa -pubout -out cert/id_rsa.pub
