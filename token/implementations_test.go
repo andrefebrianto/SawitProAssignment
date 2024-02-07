@@ -122,10 +122,7 @@ func TestToken_Generate(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			tr := &Token{
-				PrivateKey: tt.fields.PrivateKey,
-				PublicKey:  tt.fields.PublicKey,
-			}
+			tr := NewToken(tt.fields.PrivateKey, tt.fields.PublicKey)
 			got, err := tr.Generate(tt.args.ttl, tt.args.data)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Token.Generate() error = %v, wantErr %v", err, tt.wantErr)
@@ -229,10 +226,7 @@ func TestToken_Validate(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			tr := &Token{
-				PrivateKey: tt.fields.PrivateKey,
-				PublicKey:  tt.fields.PublicKey,
-			}
+			tr := NewToken(tt.fields.PrivateKey, tt.fields.PublicKey)
 			got, err := tr.Validate(tt.args.token)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Token.Validate() error = %v, wantErr %v", err, tt.wantErr)

@@ -8,6 +8,7 @@ import (
 	reflect "reflect"
 	time "time"
 
+	model "github.com/SawitProRecruitment/UserService/model"
 	gomock "github.com/golang/mock/gomock"
 )
 
@@ -35,25 +36,25 @@ func (m *MockTokenInterface) EXPECT() *MockTokenInterfaceMockRecorder {
 }
 
 // Generate mocks base method.
-func (m *MockTokenInterface) Generate(ttl time.Duration, customData interface{}) (string, error) {
+func (m *MockTokenInterface) Generate(ttl time.Duration, data model.Token) (string, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Generate", ttl, customData)
+	ret := m.ctrl.Call(m, "Generate", ttl, data)
 	ret0, _ := ret[0].(string)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // Generate indicates an expected call of Generate.
-func (mr *MockTokenInterfaceMockRecorder) Generate(ttl, customData interface{}) *gomock.Call {
+func (mr *MockTokenInterfaceMockRecorder) Generate(ttl, data interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Generate", reflect.TypeOf((*MockTokenInterface)(nil).Generate), ttl, customData)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Generate", reflect.TypeOf((*MockTokenInterface)(nil).Generate), ttl, data)
 }
 
 // Validate mocks base method.
-func (m *MockTokenInterface) Validate(token string) (interface{}, error) {
+func (m *MockTokenInterface) Validate(token string) (model.Token, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Validate", token)
-	ret0, _ := ret[0].(interface{})
+	ret0, _ := ret[0].(model.Token)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
