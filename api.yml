@@ -145,7 +145,7 @@ components:
           type: string
           format: password
           x-oapi-codegen-extra-tags:
-            validate: required,min=6,max=64
+            validate: required,min=6,max=64,password
       required:
         - phone
         - name
@@ -173,7 +173,7 @@ components:
           type: string
           format: password
           x-oapi-codegen-extra-tags:
-            validate: required,min=6,max=64
+            validate: required,min=6,max=64,password
       required:
         - phone
         - password
