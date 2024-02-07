@@ -20,6 +20,7 @@ paths:
   /users/registrations:
     post:
       summary: Register new user
+      operationId: registerUser
       requestBody:
         required: true
         content:
@@ -39,6 +40,7 @@ paths:
   /users/login:
     post:
       summary: Authenticate user credential
+      operationId: loginUser
       requestBody:
         required: true
         content:
@@ -58,6 +60,7 @@ paths:
   /users/profile:
     get:
       summary: Get current user profile
+      operationId: getUserProfile
       security:
         - BearerAuth: []
       responses:
@@ -71,6 +74,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     put:
       summary: Update current user profile
+      operationId: updateUserProfile
       security:
         - BearerAuth: []
       requestBody:
@@ -129,19 +133,19 @@ components:
       properties:
         phone:
           type: string
-          minLength: 10
-          maxLength: 13
           example: +6281234567890
+          x-oapi-codegen-extra-tags:
+            validate: required,min=10,max=13,startswith=+62
         name:
           type: string
-          minLength: 3
-          maxLength: 60
           example: Andre Febrianto
+          x-oapi-codegen-extra-tags:
+            validate: required,min=3,max=60
         password:
           type: string
           format: password
-          minLength: 6
-          maxLength: 64
+          x-oapi-codegen-extra-tags:
+            validate: required,min=6,max=64
       required:
         - phone
         - name
@@ -163,11 +167,13 @@ components:
         phone:
           type: string
           example: +6281234567890
+          x-oapi-codegen-extra-tags:
+            validate: required,min=10,max=13,startswith=+62
         password:
           type: string
           format: password
-          minLength: 6
-          maxLength: 64
+          x-oapi-codegen-extra-tags:
+            validate: required,min=6,max=64
       required:
         - phone
         - password
@@ -195,9 +201,9 @@ components:
           example: +6281234567890
         name:
           type: string
-          minLength: 3
-          maxLength: 60
           example: Andre Febrianto
+          x-oapi-codegen-extra-tags:
+            validate: required,min=3,max=60
       required:
         - phone
         - name
@@ -207,13 +213,11 @@ components:
       properties:
         phone:
           type: string
-          minLength: 10
-          maxLength: 13
           example: +6281234567890
+          x-oapi-codegen-extra-tags:
+            validate: required,min=10,max=13,startswith=+62
         name:
           type: string
-          minLength: 3
-          maxLength: 60
           example: Andre Febrianto
       required:
         - phone
