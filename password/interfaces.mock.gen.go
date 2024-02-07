@@ -33,31 +33,31 @@ func (m *MockPasswordInterface) EXPECT() *MockPasswordInterfaceMockRecorder {
 	return m.recorder
 }
 
-// GenerateFromPassword mocks base method.
-func (m *MockPasswordInterface) GenerateFromPassword(password string) (string, error) {
+// GenerateHash mocks base method.
+func (m *MockPasswordInterface) GenerateHash(password string) (string, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GenerateFromPassword", password)
+	ret := m.ctrl.Call(m, "GenerateHash", password)
 	ret0, _ := ret[0].(string)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GenerateFromPassword indicates an expected call of GenerateFromPassword.
-func (mr *MockPasswordInterfaceMockRecorder) GenerateFromPassword(password interface{}) *gomock.Call {
+// GenerateHash indicates an expected call of GenerateHash.
+func (mr *MockPasswordInterfaceMockRecorder) GenerateHash(password interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GenerateFromPassword", reflect.TypeOf((*MockPasswordInterface)(nil).GenerateFromPassword), password)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GenerateHash", reflect.TypeOf((*MockPasswordInterface)(nil).GenerateHash), password)
 }
 
-// VerifyPassword mocks base method.
-func (m *MockPasswordInterface) VerifyPassword(hashedPassword, password string) error {
+// Validate mocks base method.
+func (m *MockPasswordInterface) Validate(hashedPassword, password string) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "VerifyPassword", hashedPassword, password)
+	ret := m.ctrl.Call(m, "Validate", hashedPassword, password)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
-// VerifyPassword indicates an expected call of VerifyPassword.
-func (mr *MockPasswordInterfaceMockRecorder) VerifyPassword(hashedPassword, password interface{}) *gomock.Call {
+// Validate indicates an expected call of Validate.
+func (mr *MockPasswordInterfaceMockRecorder) Validate(hashedPassword, password interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "VerifyPassword", reflect.TypeOf((*MockPasswordInterface)(nil).VerifyPassword), hashedPassword, password)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Validate", reflect.TypeOf((*MockPasswordInterface)(nil).Validate), hashedPassword, password)
 }

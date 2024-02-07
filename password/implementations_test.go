@@ -38,10 +38,8 @@ func TestPassword_GenerateFromPassword(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			p := &Password{
-				hashCost: tt.fields.hashCost,
-			}
-			_, err := p.GenerateFromPassword(tt.args.password)
+			p := NewPassword(tt.fields.hashCost)
+			_, err := p.GenerateHash(tt.args.password)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Password.GenerateFromPassword() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -100,10 +98,8 @@ func TestPassword_VerifyPassword(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			p := &Password{
-				hashCost: tt.fields.hashCost,
-			}
-			if err := p.VerifyPassword(tt.args.hashedPassword, tt.args.password); (err != nil) != tt.wantErr {
+			p := NewPassword(tt.fields.hashCost)
+			if err := p.Validate(tt.args.hashedPassword, tt.args.password); (err != nil) != tt.wantErr {
 				t.Errorf("Password.VerifyPassword() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
