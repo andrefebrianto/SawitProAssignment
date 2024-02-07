@@ -16,7 +16,9 @@ init: generate
 	go mod vendor
 
 test:
-	go test -short -coverprofile coverage.out -v ./... && go tool cover -html=coverage.out
+	go test -short -coverprofile coverage.tmp.out -v ./...
+	cat coverage.tmp.out | grep -v ".mock.gen.go" > coverage.out
+	go tool cover -html=coverage.out
 
 generate: generated generate_mocks
 
