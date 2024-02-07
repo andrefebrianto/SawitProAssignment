@@ -56,6 +56,7 @@ func initTokenSigningKey() *token.Token {
 	if err != nil {
 		log.Fatalln(err)
 	}
+
 	pubKey, err := os.ReadFile("cert/id_rsa.pub")
 	if err != nil {
 		log.Fatalln(err)
