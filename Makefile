@@ -1,6 +1,6 @@
 
 
-.PHONY: clean all init generate generate_mocks
+.PHONY: clean all init generate generate_mocks generate_key
 
 all: build/main
 
@@ -10,6 +10,7 @@ build/main: cmd/main.go generated
 
 clean:
 	rm -rf generated
+	rm -rf cert
 
 init: generate
 	go mod tidy
@@ -38,7 +39,7 @@ $(INTERFACES_GEN_GO_FILES): %.mock.gen.go: %.go
 validate_api_spec:
 	openapi-spec-validator api.yml
 
-cert:
+generate_key:
 	@echo "Gemerating RSA certificate..."
 	mkdir cert || true
 	openssl genrsa -out cert/id_rsa 4096
