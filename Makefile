@@ -21,7 +21,7 @@ test:
 	cat coverage.tmp.out | grep -v ".mock.gen.go" > coverage.out
 	go tool cover -html=coverage.out
 
-generate: generated generate_mocks
+generate: generated generate_mocks generate_key
 
 generated: api.yml
 	@echo "Generating files..."
