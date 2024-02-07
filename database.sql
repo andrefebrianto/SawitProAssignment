@@ -9,12 +9,12 @@
 
 CREATE TABLE IF NOT EXISTS users (
   id BIGSERIAL NOT NULL PRIMARY KEY,
-	'name' VARCHAR(60) NOT NULL,
+	"name" VARCHAR(60) NOT NULL,
   phone VARCHAR(15) NOT NULL UNIQUE,
-  'password' VARCHAR(100) NOT NULL,
+  "password" VARCHAR(100) NOT NULL,
   login_count BIGINT NOT NULL DEFAULT 0
 );
 
 
-INSERT INTO users ('name', phone, 'password') VALUES ('John Doe', '+6281234567890', '$2y$12$wuEg1M4Px4TwENtdJdNx/exizdeEHB1HsiS9SNJ4E0b8msYdJ4HOe');
-INSERT INTO users ('name', phone, 'password') VALUES ('Mark Levinson', '+6280987654321', '$2y$12$zMdiXZxEF/Two9xcea3OQ.vaLAwmAI9s.LD0TI6gQGU4s/isGdYSy');
+INSERT INTO users ("name", phone, "password") VALUES ('John Doe', '+6281234567890', '$2y$12$wuEg1M4Px4TwENtdJdNx/exizdeEHB1HsiS9SNJ4E0b8msYdJ4HOe');
+INSERT INTO users ("name", phone, "password") VALUES ('Mark Levinson', '+6280987654321', '$2y$12$zMdiXZxEF/Two9xcea3OQ.vaLAwmAI9s.LD0TI6gQGU4s/isGdYSy');
